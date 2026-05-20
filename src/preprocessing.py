@@ -8,20 +8,11 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split
 import joblib
 
-
-# ──────────────────────────────────────────
-# 1. LOAD DATASET
-# ──────────────────────────────────────────
-
 def load_datasets():
     crop_rec_path = kagglehub.dataset_download("atharvaingle/crop-recommendation-dataset")
     df_rec = pd.read_csv(os.path.join(crop_rec_path, "Crop_recommendation.csv"))
     return df_rec
 
-
-# ──────────────────────────────────────────
-# 2. INSPECT
-# ──────────────────────────────────────────
 
 def inspect(df_rec):
     print("\n── Crop Recommendation ──")
@@ -30,12 +21,6 @@ def inspect(df_rec):
     print(df_rec.dtypes)
     print(df_rec.isnull().sum())
 
-
-# ──────────────────────────────────────────
-# 3. ADD YIELD COLUMN
-# FAO agronomic benchmark values (hg/ha)
-# Documented in report as literature-sourced reference values
-# ──────────────────────────────────────────
 
 CROP_YIELD_MAP = {
     "rice":        45000,
@@ -75,11 +60,6 @@ def add_yield(df):
 
     return df
 
-
-# ──────────────────────────────────────────
-# 4. PREPROCESS
-# ──────────────────────────────────────────
-
 def preprocess(df):
     df = df.drop_duplicates()
 
@@ -114,11 +94,6 @@ def preprocess(df):
     print(f"Classes: {list(le.classes_)}")
 
     return X_train, X_test, yc_train, yc_test, yy_train, yy_test, feature_cols, le, df
-
-
-# ──────────────────────────────────────────
-# 5. MAIN
-# ──────────────────────────────────────────
 
 if __name__ == "__main__":
     df_rec = load_datasets()

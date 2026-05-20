@@ -6,10 +6,6 @@ import numpy as np
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# ─────────────────────────────────────────
-# MODEL LOADING
-# ─────────────────────────────────────────
-
 def load_all_models():
     """Load all serialized models and artifacts from the models/ directory."""
     paths = {
@@ -26,11 +22,6 @@ def load_all_models():
             f"Run models.py first to train and serialize all models."
         )
     return {k: joblib.load(p) for k, p in paths.items()}
-
-
-# ─────────────────────────────────────────
-# INPUT VALIDATION
-# ─────────────────────────────────────────
 
 FIELD_BOUNDS = {
     "N":           (0,    300,  "Nitrogen must be between 0 and 300 kg/ha."),
@@ -54,11 +45,6 @@ def validate_inputs(values: dict) -> list[str]:
             errors.append(msg)
     return errors
 
-
-# ─────────────────────────────────────────
-# FEATURE PREPARATION
-# ─────────────────────────────────────────
-
 FEATURE_ORDER = ["N", "P", "K", "temperature", "humidity", "ph", "rainfall"]
 
 def prepare_input(values: dict, scaler) -> np.ndarray:
@@ -68,11 +54,6 @@ def prepare_input(values: dict, scaler) -> np.ndarray:
     """
     arr = np.array([values[k] for k in FEATURE_ORDER]).reshape(1, -1)
     return scaler.transform(arr)
-
-
-# ─────────────────────────────────────────
-# INFERENCE
-# ─────────────────────────────────────────
 
 def predict_crop(arr_scaled, dt_model, label_enc) -> str:
     """Run Decision Tree and return crop name string."""
@@ -95,10 +76,6 @@ def predict_yield(arr_scaled, lr_model) -> tuple[float, float, float]:
     margin = yld * 0.08
     return yld, yld - margin, yld + margin
 
-
-# ─────────────────────────────────────────
-# AGRONOMIC GUIDANCE
-# ─────────────────────────────────────────
 
 CLUSTER_GUIDANCE = {
     0: "Low-to-moderate nutrient zone. Recommend legume rotation and organic compost before planting.",
@@ -126,11 +103,6 @@ CROP_EMOJI = {
 def get_crop_emoji(crop_name: str) -> str:
     return CROP_EMOJI.get(crop_name.lower(), "🌱")
 
-
-# ─────────────────────────────────────────
-# FORMATTING
-# ─────────────────────────────────────────
-
 def format_yield(yld: float, lower: float, upper: float) -> tuple[str, str]:
     """Returns (main display string, confidence bound string)."""
     main = f"{yld:,.0f} hg/ha"
@@ -140,11 +112,6 @@ def format_yield(yld: float, lower: float, upper: float) -> tuple[str, str]:
 
 def format_crop(crop_name: str) -> str:
     return f"{get_crop_emoji(crop_name)}  {crop_name.capitalize()}"
-
-
-# ─────────────────────────────────────────
-# RESULTS EXPORT
-# ─────────────────────────────────────────
 
 def save_prediction_log(values: dict, crop: str, cluster: int, yld: float):
     """
@@ -171,11 +138,6 @@ def save_prediction_log(values: dict, crop: str, cluster: int, yld: float):
         if not file_exists:
             writer.writeheader()
         writer.writerow(row)
-
-
-# ─────────────────────────────────────────
-# QUICK TEST
-# ─────────────────────────────────────────
 
 if __name__ == "__main__":
     print("Loading models...")

@@ -18,11 +18,6 @@ from preprocessing import load_datasets, add_yield, preprocess
 os.makedirs("models", exist_ok=True)
 os.makedirs("results", exist_ok=True)
 
-
-# ──────────────────────────────────────────
-# 1. DECISION TREE - Crop Classification
-# ──────────────────────────────────────────
-
 def train_decision_tree(X_train, X_test, yc_train, yc_test, feature_cols, le):
     print("\n── Training Decision Tree Classifier ──")
 
@@ -64,11 +59,6 @@ def train_decision_tree(X_train, X_test, yc_train, yc_test, feature_cols, le):
 
     return dt, {"accuracy": acc, "precision": prec, "recall": rec}
 
-
-# ──────────────────────────────────────────
-# 2. KMeans CLUSTERING - Soil Zone Segmentation
-# ──────────────────────────────────────────
-
 def train_kmeans(X_train, X_test):
     print("\n── Training KMeans Clustering ──")
 
@@ -105,11 +95,6 @@ def train_kmeans(X_train, X_test):
 
     return best_model, {"best_k": best_k, "silhouette": best_score}
 
-
-# ──────────────────────────────────────────
-# 3. LINEAR REGRESSION - Yield Prediction
-# ──────────────────────────────────────────
-
 def train_linear_regression(X_train, X_test, yy_train, yy_test):
     print("\n── Training Linear Regression ──")
 
@@ -142,11 +127,6 @@ def train_linear_regression(X_train, X_test, yy_train, yy_test):
     print("  Model saved: models/linear_regression.pkl")
 
     return lr, {"rmse": rmse, "mae": mae, "r2": r2}
-
-
-# ──────────────────────────────────────────
-# 4. MAIN
-# ──────────────────────────────────────────
 
 if __name__ == "__main__":
     df_rec = load_datasets()

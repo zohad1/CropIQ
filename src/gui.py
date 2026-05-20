@@ -10,9 +10,6 @@ matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-# ─────────────────────────────────────────
-# PALETTE
-# ─────────────────────────────────────────
 C = {
     "bg":           "#F4F7F0",
     "white":        "#FFFFFF",
@@ -33,9 +30,6 @@ C = {
     "danger_tint":  "#FCEBEB",
 }
 
-# ─────────────────────────────────────────
-# LOAD MODELS
-# ─────────────────────────────────────────
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def load_models():
@@ -65,9 +59,6 @@ CROP_EMOJI = {
 }
 
 
-# ─────────────────────────────────────────
-# HELPERS
-# ─────────────────────────────────────────
 
 def make_frame(parent, bg=None, padx=0, pady=0):
     return tk.Frame(parent, bg=bg or C["bg"], padx=padx, pady=pady)
@@ -87,11 +78,6 @@ def label(parent, text, size=10, weight="normal", color=None, bg=None, anchor="w
 
 def divider(parent, bg=None):
     return tk.Frame(parent, bg=bg or C["border"], height=1)
-
-
-# ─────────────────────────────────────────
-# MAIN APP
-# ─────────────────────────────────────────
 
 class CropIQApp(tk.Tk):
     def __init__(self):
@@ -250,11 +236,7 @@ class CropIQApp(tk.Tk):
 
         self._build_predict(self._tabs["predict"])
         self._build_visualize(self._tabs["visualize"])
-
-    # ─────────────────────────────────────────
-    # TAB: PREDICT
-    # ─────────────────────────────────────────
-
+        
     def _build_predict(self, parent):
         # page title
         title_row = make_frame(parent, bg=C["bg"], padx=24, pady=0)

@@ -17,14 +17,7 @@ env/
 .env/
 ENV/
 
-# Data files
-data/
 
-# Trained models
-models/
-
-# Generated plots / results
-results/
 
 # Jupyter
 .ipynb_checkpoints/

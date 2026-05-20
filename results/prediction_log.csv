@@ -1,0 +1,2 @@
+timestamp,N,P,K,temperature,humidity,ph,rainfall,predicted_crop,soil_cluster,predicted_yield
+2026-05-20 12:49:26,90,42,43,20.8,82.0,6.5,202.9,rice,1,81951.1

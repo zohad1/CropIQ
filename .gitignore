@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# Data files
+data/
+
+# Trained models
+models/
+
+# Generated plots / results
+results/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# kagglehub cache
+~/.cache/kagglehub/
+kaggle.json
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
